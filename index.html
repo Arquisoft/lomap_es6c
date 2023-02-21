@@ -478,12 +478,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_runtime_scenario_n">6.4. &lt;Runtime Scenario n&gt;</a></li>
 </ul>
 </li>
-<li><a href="#section-deployment-view">7. Deployment View</a>
-<ul class="sectlevel2">
-<li><a href="#_infrastructure_level_1">7.1. Infrastructure Level 1</a></li>
-<li><a href="#_infrastructure_level_2">7.2. Infrastructure Level 2</a></li>
-</ul>
-</li>
+<li><a href="#section-deployment-view">7. Deployment View</a></li>
 <li><a href="#section-concepts">8. Cross-cutting Concepts</a>
 <ul class="sectlevel2">
 <li><a href="#_domain_model">8.1. Domain model</a></li>
@@ -837,7 +832,7 @@ These stakeholders determine the extent and the level of detail of your work and
 <h3 id="_business_context">3.1. Business Context</h3>
 <div class="imageblock">
 <div class="content">
-<img src="./images/images/business_context.png" alt="Bussines context diagram">
+<img src="./images/business_context.png" alt="Bussines context diagram">
 </div>
 </div>
 <div class="paragraph">
@@ -857,7 +852,7 @@ These stakeholders determine the extent and the level of detail of your work and
 <h3 id="_technical_context">3.2. Technical Context</h3>
 <div class="imageblock">
 <div class="content">
-<img src="./images/images/technical_context.png" alt="Technical context diagram">
+<img src="./images/technical_context.png" alt="Technical context diagram">
 </div>
 </div>
 <div class="paragraph">
@@ -918,6 +913,37 @@ based upon your problem statement, the quality goals and key constraints.
 Refer to details in the following sections.</p>
 </div>
 </div>
+</div>
+<div class="paragraph">
+<p>4.1. Decisiones Tecnológicas
+Las diferentes tecnologias utilizadas en nuestra aplicación serán las siguientes:
+    - GitHub: herramienta que se utilizara para almacenar todo el código de nuestra aplicación y que nos servirá como control de versiones,
+      además de otras funcionalidades que se explicarán posteriormente.
+    - SOLID: la aplicación seguira las pautas de SOLID para descentralizar los datos de los diferentes usuarios de la aplicación mediante pods.
+    - NodeJS: se escogió este entorno para desarrollar el backend de la aplicación , ya que permitira que esta sea facilmente escalable y rápida.
+    - React: se utilizara esta biblioteca para crear las interfaces de usuario para la aplicación, ya que permite hacer interfaces mas complejas
+      al ser sus componentes independientes y, por tanto, reusables.
+    - MondoDB: se ha decidido utilizar esta base de datos ya que se trata de una base de datos no relacional que cumple todos los requisitos
+      necesarios para el correcto funcionamiento de la aplicación.</p>
+</div>
+<div class="paragraph">
+<p>4.2. Decisiones de calidad
+    - Uso de SOLID para asegurar la privacidad de los datos de todos los clientes.
+    - Se desea que esta aplicación sea usable, es decir, que todos los usuarios puedan interactuar con la aplicación de forma sencilla. Para ello
+      la aplicación debe ser facil de entender y usar.</p>
+</div>
+<div class="paragraph">
+<p>4.3. Decisiones organizativas
+    - Uso de ramas en GitHub: para el desarrollo del proyecto hemos decidido crear varias ramas, en principio hay una rama principal master de la
+      que salen otra dos que serian las de documentationDevelop (rama utilizada para la creacion y/o modificacion de la documentacion del proyecto)
+      y la rama develop (que sera utilizada para el propio desarrollo de la aplicación). En un futuro se crearan otras ramas para que cada integrante
+      del equipo pueda programar en la aplicación sin interrumpir el avance de los demas miembros del equipo.
+    - Uso de pull request y issues: se utilizaran las issues para indicar las diferentes tareas que se van a realizar respecto al desarrollo de la
+      aplicación, además se ha decidido usar pull requests para hacer los merges github, intentando que haya las colisiones o problemas al mezclar el
+      código ya que estas requests deben ser aceptadas por al menos un integrante del equipo.
+    - Uso de la Wiki de GitHub para dejar constancia de los temas tratados en las diferentes reuniones, así como sus asistentes y las diferentes
+      decisiones que se hayan podido tomar en ella.
+    - Uso de un proyecto en GitHub donde se iran moviendo las diferentes issues en el backlog, indicando asi el estado actual de dicha tarea.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1321,139 +1347,27 @@ building block instances depicted in this diagram.&gt;</em></p>
 <div class="sect1">
 <h2 id="section-deployment-view">7. Deployment View</h2>
 <div class="sectionbody">
-<div class="sidebarblock arc42help">
+<div class="imageblock">
 <div class="content">
-<div class="paragraph">
-<div class="title">Content</div>
-<p>The deployment view describes:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>the technical infrastructure used to execute your system, with infrastructure elements like geographical locations, environments, computers, processors, channels and net topologies as well as other infrastructure elements and</p>
-</li>
-<li>
-<p>the mapping of (software) building blocks to that infrastructure elements.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Often systems are executed in different environments, e.g. development environment, test environment, production environment. In such cases you should document all relevant environments.</p>
-</div>
-<div class="paragraph">
-<p>Especially document the deployment view when your software is executed as distributed system with more then one computer, processor, server or container or when you design and construct your own hardware processors and chips.</p>
-</div>
-<div class="paragraph">
-<p>From a software perspective it is sufficient to capture those elements of the infrastructure that are needed to show the deployment of your building blocks. Hardware architects can go beyond that and describe the infrastructure to any level of detail they need to capture.</p>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>Software does not run without hardware.
-This underlying infrastructure can and will influence your system and/or some
-cross-cutting concepts. Therefore, you need to know the infrastructure.</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>Maybe the highest level deployment diagram is already contained in section 3.2. as
-technical context with your own infrastructure as ONE black box. In this section you will
-zoom into this black box using additional deployment diagrams:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>UML offers deployment diagrams to express that view. Use it, probably with nested diagrams,
-when your infrastructure is more complex.</p>
-</li>
-<li>
-<p>When your (hardware) stakeholders prefer other kinds of diagrams rather than the deployment diagram, let them use any kind that is able to show nodes and channels of the infrastructure.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_infrastructure_level_1">7.1. Infrastructure Level 1</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>Describe (usually in a combination of diagrams, tables, and text):</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>the distribution of your system to multiple locations, environments, computers, processors, .. as well as the physical connections between them</p>
-</li>
-<li>
-<p>important justification or motivation for this deployment structure</p>
-</li>
-<li>
-<p>Quality and/or performance features of the infrastructure</p>
-</li>
-<li>
-<p>the mapping of software artifacts to elements of the infrastructure</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>For multiple environments or alternative deployments please copy that section of arc42 for all relevant environments.</p>
-</div>
+<img src="./images/technical_context.png" alt="Deployment View">
 </div>
 </div>
 <div class="paragraph">
-<p><em><strong>&lt;Overview Diagram&gt;</strong></em></p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Motivation</dt>
-<dd>
-<p><em>&lt;explanation in text form&gt;</em></p>
-</dd>
-<dt class="hdlist1">Quality and/or Performance Features</dt>
-<dd>
-<p><em>&lt;explanation in text form&gt;</em></p>
-</dd>
-<dt class="hdlist1">Mapping of Building Blocks to Infrastructure</dt>
-<dd>
-<p><em>&lt;description of the mapping&gt;</em></p>
-</dd>
-</dl>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_infrastructure_level_2">7.2. Infrastructure Level 2</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>Here you can include the internal structure of (some) infrastructure elements from level 1.</p>
+<p>Previamente mencionado en el diagrama de contexto técnico:</p>
 </div>
 <div class="paragraph">
-<p>Please copy the structure from level 1 for each selected element.</p>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_infrastructure_element_1">7.2.1. <em>&lt;Infrastructure Element 1&gt;</em></h4>
-<div class="paragraph">
-<p><em>&lt;diagram + explanation&gt;</em></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_infrastructure_element_2">7.2.2. <em>&lt;Infrastructure Element 2&gt;</em></h4>
-<div class="paragraph">
-<p><em>&lt;diagram + explanation&gt;</em></p>
+<p><strong>Funcionamiento</strong></p>
 </div>
 <div class="paragraph">
-<p>&#8230;&#8203;</p>
+<p>El usuario accederá a una aplicación web dockerizada tanto en front como en back. Existe conexión entre el back-end y los almacenes persistentes, de donde extrae información tanto del usuario actual como de los marcadores de todos los usuarios.</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_infrastructure_element_n">7.2.3. <em>&lt;Infrastructure Element n&gt;</em></h4>
 <div class="paragraph">
-<p><em>&lt;diagram + explanation&gt;</em></p>
+<p>Las peticiones se realizan por HTTP al front-end, que se comunica con el back-end esperando respuestas en JSON.</p>
+</div>
+<div class="paragraph">
+<p>La aplicación sigue un esquema cliente-servidor, con la inclusión de los PODs personales.</p>
 </div>
 <div style="page-break-after: always;"></div>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -1675,6 +1589,11 @@ concrete and measurable.</p>
 </div>
 </div>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/QualityTree.png" alt="Quality Tree">
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_quality_scenarios">10.2. Quality Scenarios</h3>
@@ -1716,6 +1635,47 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 </div>
 </div>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Cualidad</th>
+<th class="tableblock halign-left valign-top">Escenario</th>
+<th class="tableblock halign-left valign-top">Prioridad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Accesibilidad</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">La aplicación se adapta a la vista de los diferentes dispositivos</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alta</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Usabilidad</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">El usuario puede funcionar con la aplicación de manera intuitiva y sencilla</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alta</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Privacidad</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Solamente el usuario puede acceder a sus datos personales ya que se almacenan en su Pod personal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alta</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integridad</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Los datos guardados siempre serán correctos</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Media</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Seguridad</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">La información sensible de los usuarios será protegida, además, se necesita autorización para acceder a ubicación y demás servicios</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alta</p></td>
+</tr>
+</tbody>
+</table>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
