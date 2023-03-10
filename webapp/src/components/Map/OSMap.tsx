@@ -15,17 +15,18 @@ async function saveMarker(markerData: any) {
 
 export function OSMap(){
 
-    function addMarker(lat: number, lng: number) {
-      const newMarker = { lat, lng };
+    function addMarker(lat: number, lng: number, comment: string) {
+      const newMarker = { lat, lng, comment};
       saveMarker(newMarker); // Llama a la función saveMarker para guardar el nuevo marcador en la base de datos. 
     }
 
     function MyComponent() {
       const map = useMapEvents({
         click: (e) => {
+          const comment = 'comentario' //TODO: implementar que se puedan añadir comentarios desde el front
           const { lat, lng } = e.latlng;
           L.marker([lat, lng], { icon: markerIcon }).addTo(map);
-          addMarker(lat, lng);
+          addMarker(lat, lng, comment);
         }
       });
       return null;

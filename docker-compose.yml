@@ -8,8 +8,7 @@ services:
     ports:
       - "5000:5000"
     networks:
-      backend:
-        ipv4_address: 192.168.1.5
+      - backend
 
   webapp:
     build: ./webapp
@@ -46,18 +45,9 @@ services:
     container_name: mongodb
     hostname: mongodb
     restart: always
-    ports:
-      - "27017:27017"
-    expose:
-      - 27017
     networks:
-      backend:
-        ipv4_address: 192.168.1.10
+      - backend
 
 networks:
   backend:
     driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 192.168.1.0/24

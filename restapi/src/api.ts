@@ -7,6 +7,7 @@ const api:Router = express.Router()
 export interface Marker {
     lat: number;
     lng: number;
+    comment: string;
 }
 
 api.post(
@@ -17,7 +18,8 @@ api.post(
   async (req: Request, res: Response): Promise<Response> => {
     let latReq = req.body.lat;
     let lngReq = req.body.lng;
-    let marker: Marker = {lat:latReq ,lng:lngReq}
+    let comment = req.body.comment;
+    let marker: Marker = {lat:latReq ,lng:lngReq, comment}
     storeMarker(marker);
     return res.sendStatus(200);
   }
