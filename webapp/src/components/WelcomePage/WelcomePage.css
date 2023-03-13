@@ -1,0 +1,50 @@
+.welcome_page {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 5em;
+}
+
+.map {
+  width: 50%;
+  height: 25%;
+  border: 2px solid white;
+  border-radius: 1em;
+  box-shadow: 0 0 20px #bbb6b6;
+}
+
+.welcome_left {
+  width: 50%;
+  display: grid;
+  place-items: center;
+  grid-row: span 2;
+}
+
+.comenzar {
+  background-color: #333;
+  text-decoration: none;
+  color: white;
+  border: none;
+  border-radius: 1em;
+  padding: 0.5rem 1rem;
+  font-size: 1.5em;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.comenzar:hover {
+  background-color: #777;
+  transform: scale(1.1);
+}
+
+p {
+  font-size: 1.5em;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  color: #bbb6b6;
+}
+h1 {
+  color: white;
+}
