@@ -462,7 +462,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_technical_context">3.2. Technical Context</a></li>
 </ul>
 </li>
-<li><a href="#section-solution-strategy">4. Solution Strategy</a></li>
+<li><a href="#section-solution-strategy">4. Solution Strategy</a>
+<ul class="sectlevel2">
+<li><a href="#_4_1_decisiones_tecnológicas">4.1. 4.1. Decisiones Tecnológicas</a></li>
+<li><a href="#_4_2_decisiones_de_calidad">4.2. 4.2. Decisiones de calidad</a></li>
+<li><a href="#_4_3_decisiones_organizativas">4.3. 4.3. Decisiones organizativas</a></li>
+</ul>
+</li>
 <li><a href="#section-building-block-view">5. Building Block View</a>
 <ul class="sectlevel2">
 <li><a href="#_whitebox_overall_system">5.1. Whitebox Overall System</a></li>
@@ -542,93 +548,52 @@ For documentation of your own system you use better the <em>plain</em> version.<
 <div class="sect1">
 <h2 id="section-introduction-and-goals">1. Introduction and Goals</h2>
 <div class="sectionbody">
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>Describes the relevant requirements and the driving forces that software architects and development team must consider. These include</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>underlying business goals, essential features and functional requirements for the system</p>
-</li>
-<li>
-<p>quality goals for the architecture</p>
-</li>
-<li>
-<p>relevant stakeholders and their expectations</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
+<div class="paragraph arc42help">
 <p>La petición del ayuntamiento de la ciudad de Bruselas es una aplicación que permita a sus ciudadanos tener un mapa
-donde puedan colocar marcadores en distintos sitios (que pueden ser desde monumentos o lugares de la ciudad, hasta
-tiendas, restaurantes o bares de esta). Los ciudadanos podrán crear sus propios mapas personalizados y compartirlos con sus amigos.</p>
+donde puedan colocar marcadores en distintos sitios. Actualmente solo permite marcar sitios con un tipo de marcador pero posteriormente se podrán escoger diferentes tipos de marcadores dependiendo del lugar, los lugares posibles serán bares, restaurantes, monumentos, paisajes o miradores. Los ciudadanos podrán crear sus propios mapas personalizados y compartirlos con sus amigos.</p>
 </div>
 <div class="sect2">
 <h3 id="_requirements_overview">1.1. Requirements Overview</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<div class="title">Contents</div>
-<p>Short description of the functional requirements, driving forces, extract (or abstract)
-of requirements. Link to (hopefully existing) requirements documents
-(with version number and information where to find it).</p>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>From the point of view of the end users a system is created or modified to
-improve support of a business activity and/or improve the quality.</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>Short textual description, probably in tabular use-case format.
-If requirements documents exist this overview should refer to these documents.</p>
-</div>
-<div class="paragraph">
-<p>Keep these excerpts as short as possible. Balance readability of this document with potential redundancy w.r.t to requirements documents.</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
+<div class="paragraph arc42help">
 <p>La aplicación deberá permitir a los usuarios añadir y visualizar en un mapa los diferentes marcadores dependiendo que tipo de lugar
-sea.Estos marcadores pueden tener asociadas tanto comentarios, puntuaciones… como fotos en la ubicación del marcador.</p>
+sea.Estos marcadores pueden tener asociadas tanto comentarios, puntuaciones y valoraciones, como fotos en la ubicación del marcador.</p>
 </div>
 <div class="paragraph">
-<p>Por otra parte, los distintos usuarios pueden compartir sus mapas o marcadores con sus amigos si así lo desean y ver las fotos,
-comentarios, valoraciones… que este amigo ha publicado.</p>
+<p>Por otra parte, los distintos usuarios pueden compartir sus mapas(con el conjunto de marcadores que tenga asociado) con sus amigos si así lo desean y ver las fotos,
+comentarios, valoraciones y todos los datos que este amigo ha publicado en los marcadores.</p>
 </div>
 <div class="paragraph">
-<p>La aplicación contará con un filtro para poder ver el mapa, por ejemplo, por categoría (si solo queremos ver las tiendas, o solo los
-restaurantes…), solo los marcadores de los amigos&#8230;&#8203;</p>
+<p>La aplicación contará con un filtro para poder ver el mapa, por ejemplo, por categoría (si solo queremos ver las tiendas, restaurantes o cualquiera de los tipos de marcadores enumerados anteriormente), solo los marcadores de los amigos o de un amigo en concreto. Esta funcionalidad todavia no está disponible pero se implementara en próximas versiones.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_quality_goals">1.2. Quality Goals</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<div class="title">Contents</div>
-<p>The top three (max five) quality goals for the architecture whose fulfillment is of highest importance to the major stakeholders. We really mean quality goals for the architecture. Don&#8217;t confuse them with project goals. They are not necessarily identical.</p>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>You should know the quality goals of your most important stakeholders, since they will influence fundamental architectural decisions. Make sure to be very concrete about these qualities, avoid buzzwords.
-If you as an architect do not know how the quality of your work will be judged …</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>A table with quality goals and concrete scenarios, ordered by priorities</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>El principal objetivo de la aplicación sería permitir que los ciudadanos puedan añadir lugares en un mapa(con las diferentes categorias propuestas).
-Otra meta que va muy ligada al anterior seria poder ver dichos lugares en una ventana tipo mapa y, por ultimo, el siguiente objetivo más prioritario
-seria conceder a los usuarios la posibilidad de compartir sus mapas(con los diferentes marcadores de lugares que haya en ellos) con sus amigos.</p>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Objetivos</th>
+<th class="tableblock halign-left valign-top">Descripcion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Privacidad</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Se utlizará la metodologia SOLID para garantizar la seguridad de los datos del usuario, quien será quien nos de acceso a los datos que considere oportunos a través del uso un POD, que será privado e independiente para cada usuario</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Usabilidad</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">La aplicación deberá ser intuitiva y sencilla de usar para el cliente</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Eficiencia</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Se buscara una buena eficiencia de la aplicación, cosa que mejorará a la experiencia del cliente</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect2">
 <h3 id="_stakeholders">1.3. Stakeholders</h3>
@@ -882,75 +847,72 @@ These stakeholders determine the extent and the level of detail of your work and
 <div class="sect1">
 <h2 id="section-solution-strategy">4. Solution Strategy</h2>
 <div class="sectionbody">
-<div class="sidebarblock arc42help">
-<div class="content">
+<div class="sect2 arc42help">
+<h3 id="_4_1_decisiones_tecnológicas">4.1. 4.1. Decisiones Tecnológicas</h3>
 <div class="paragraph">
-<div class="title">Contents</div>
-<p>A short summary and explanation of the fundamental decisions and solution strategies, that shape the system&#8217;s architecture. These include</p>
+<p>Las diferentes tecnologias utilizadas en nuestra aplicación serán las siguientes:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>technology decisions</p>
+<p>GitHub: herramienta que se utilizara para almacenar todo el código de nuestra aplicación y que nos servirá como control de versiones y también como planificador de tareas mediante el uso de los issues.</p>
 </li>
 <li>
-<p>decisions about the top-level decomposition of the system, e.g. usage of an architectural pattern or design pattern</p>
+<p>SOLID: la aplicación seguira las pautas de SOLID para descentralizar los datos de los diferentes usuarios de la aplicación mediante pods, lo que permitirá a los propios usuarios tener el control absoluto de sus datos privados.</p>
 </li>
 <li>
-<p>decisions on how to achieve key quality goals</p>
+<p>NodeJS: se escogió este entorno para desarrollar el backend de la aplicación , ya que permitira que esta sea facilmente escalable y rápida.</p>
 </li>
 <li>
-<p>relevant organizational decisions, e.g. selecting a development process or delegating certain tasks to third parties.</p>
+<p>React: se utilizara esta biblioteca para crear las interfaces de usuario para la aplicación, ya que permite hacer interfaces mas complejas
+al ser sus componentes independientes y, por tanto, reusables.</p>
+</li>
+<li>
+<p>MondoDB: se ha decidido utilizar esta base de datos ya que se trata de una base de datos no relacional que cumple todos los requisitos
+necesarios para el correcto funcionamiento de la aplicación.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>These decisions form the cornerstones for your architecture. They are the basis for many other detailed decisions or implementation rules.</p>
 </div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>Keep the explanation of these key decisions short.</p>
+<div class="sect2">
+<h3 id="_4_2_decisiones_de_calidad">4.2. 4.2. Decisiones de calidad</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Uso de SOLID para asegurar la privacidad de los datos de todos los clientes ya que cada uno de nuestros clientes tendra un POD personal en el que almacenará sus datos personales y del cual tendrá el control absoluto, cediendo a la aplicación los datos que considere oportunos.</p>
+</li>
+<li>
+<p>Se desea que esta aplicación sea usable, es decir, que todos los usuarios puedan interactuar con la aplicación de forma sencilla. Para ello la aplicación debe tener una interfaz clara, accesible y facil de entender para cualquier tipo de usuario.</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<p>Motivate what you have decided and why you decided that way,
-based upon your problem statement, the quality goals and key constraints.
-Refer to details in the following sections.</p>
 </div>
-</div>
-</div>
-<div class="paragraph">
-<p>4.1. Decisiones Tecnológicas
-Las diferentes tecnologias utilizadas en nuestra aplicación serán las siguientes:
-    - GitHub: herramienta que se utilizara para almacenar todo el código de nuestra aplicación y que nos servirá como control de versiones,
-      además de otras funcionalidades que se explicarán posteriormente.
-    - SOLID: la aplicación seguira las pautas de SOLID para descentralizar los datos de los diferentes usuarios de la aplicación mediante pods.
-    - NodeJS: se escogió este entorno para desarrollar el backend de la aplicación , ya que permitira que esta sea facilmente escalable y rápida.
-    - React: se utilizara esta biblioteca para crear las interfaces de usuario para la aplicación, ya que permite hacer interfaces mas complejas
-      al ser sus componentes independientes y, por tanto, reusables.
-    - MondoDB: se ha decidido utilizar esta base de datos ya que se trata de una base de datos no relacional que cumple todos los requisitos
-      necesarios para el correcto funcionamiento de la aplicación.</p>
-</div>
-<div class="paragraph">
-<p>4.2. Decisiones de calidad
-    - Uso de SOLID para asegurar la privacidad de los datos de todos los clientes.
-    - Se desea que esta aplicación sea usable, es decir, que todos los usuarios puedan interactuar con la aplicación de forma sencilla. Para ello
-      la aplicación debe ser facil de entender y usar.</p>
-</div>
-<div class="paragraph">
-<p>4.3. Decisiones organizativas
-    - Uso de ramas en GitHub: para el desarrollo del proyecto hemos decidido crear varias ramas, en principio hay una rama principal master de la
-      que salen otra dos que serian las de documentationDevelop (rama utilizada para la creacion y/o modificacion de la documentacion del proyecto)
-      y la rama develop (que sera utilizada para el propio desarrollo de la aplicación). En un futuro se crearan otras ramas para que cada integrante
-      del equipo pueda programar en la aplicación sin interrumpir el avance de los demas miembros del equipo.
-    - Uso de pull request y issues: se utilizaran las issues para indicar las diferentes tareas que se van a realizar respecto al desarrollo de la
-      aplicación, además se ha decidido usar pull requests para hacer los merges github, intentando que haya las colisiones o problemas al mezclar el
-      código ya que estas requests deben ser aceptadas por al menos un integrante del equipo.
-    - Uso de la Wiki de GitHub para dejar constancia de los temas tratados en las diferentes reuniones, así como sus asistentes y las diferentes
-      decisiones que se hayan podido tomar en ella.
-    - Uso de un proyecto en GitHub donde se iran moviendo las diferentes issues en el backlog, indicando asi el estado actual de dicha tarea.</p>
+<div class="sect2">
+<h3 id="_4_3_decisiones_organizativas">4.3. 4.3. Decisiones organizativas</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Uso de ramas en GitHub: para el desarrollo del proyecto hemos decidido crear varias ramas, en principio hay una rama principal master de la
+que salen otra dos que serian las de documentationDevelop (rama utilizada para la creacion y/o modificacion de la documentacion del proyecto)
+y la rama develop (que sera utilizada para el propio desarrollo de la aplicación). En un futuro se crearan otras ramas para que cada integrante
+del equipo pueda programar en la aplicación sin interrumpir el avance de los demas miembros del equipo.</p>
+</li>
+<li>
+<p>Uso de pull request y issues: se utilizaran las issues para indicar las diferentes tareas que se van a realizar respecto al desarrollo de la
+aplicación, además se ha decidido usar pull requests para hacer los merges github, intentando que haya las colisiones o problemas al mezclar el
+código ya que estas requests deben ser aceptadas por al menos un integrante del equipo.</p>
+</li>
+<li>
+<p>Uso de la Wiki de GitHub para dejar constancia de los temas tratados en las diferentes reuniones, así como sus asistentes y las diferentes
+decisiones que se hayan podido tomar en ella.</p>
+</li>
+<li>
+<p>Uso de un proyecto en GitHub donde se iran moviendo las diferentes issues en el backlog, indicando asi el estado actual de dicha tarea.</p>
+</li>
+</ul>
 </div>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1084,8 +1046,20 @@ Las diferentes tecnologias utilizadas en nuestra aplicación serán las siguient
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&#8230;&#8203;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&#8230;&#8203;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>MainMenu</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Página inicial (menú principal) de la aplicación. En esta se muestran enlaces a otras páginas de la app para redireccionar al usuario.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>WelcomePage</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Página de bienvenida a la aplicación. En esta se muestra el mapa y enlaces a otras páginas de la app para redireccionar al usuario.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>LoginPage</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Permite al usuario de la aplicación iniciar sesión con su usuario y contraseña.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>SignupPage</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Permite a un nuevo usuario de la aplicación registrarse con su usuario, email y contraseña.</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -1399,7 +1373,7 @@ here in this central section or whether you better document it locally
 <td class="tableblock halign-left valign-top"><p class="tableblock">OpenStreetMaps API</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Para la generación de mapas utilizaremos esta API</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Es gratuita</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Tenemos que aprender a utilizarla</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Curva de aprendizaje</p></td>
 </tr>
 </tbody>
 </table>
@@ -1543,6 +1517,21 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 <td class="tableblock halign-left valign-top"><p class="tableblock">La información sensible de los usuarios será protegida, además, se necesita autorización para acceder a ubicación y demás servicios</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Alta</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mantenibilidad</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Que sea susceptible y flexible a cambios</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Media-Alta</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Descentralización</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Los datos de los usuarios no estan en un servidor central, esta fuertemente relacionado con la privacidad</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Media</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Buenas prácticas</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">La aplicación cumple con las buenas prácticas de desarrollo de software</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Media</p></td>
+</tr>
 </tbody>
 </table>
 <div style="page-break-after: always;"></div>
@@ -1671,6 +1660,46 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 <td class="tableblock halign-left valign-top"><p class="tableblock">SOLID</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Aunque se nombre de la misma manera que los principios de SOLID de diseño de software propuesto por Robert C. Martin, no se refiere a estos, sino al proyecto de descentralización de datos en la web dirigido por Tim Berners-Lee</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Chinchetas</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cuando se habla de chinchetas, se refiere a un marcador en un mapa</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">API</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Se refiere a Application Programming Interface, que es una interfaz de programación de aplicaciones que define las interacciones entre diferentes componentes de un software</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Back-end</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Se refiere a la parte que se encuentra en el servidor y que es invisible para el usuario</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Front-end</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Se refiere a la parte que se encuentra en el cliente y que es visible para el usuario</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Github</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Es una plataforma de desarrollo colaborativo para alojar proyectos utilizando el sistema de control de versiones Git</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Git</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Es un sistema de control de versiones distribuido, diseñado para manejar todo, desde proyectos pequeños a muy grandes, con velocidad y eficiencia</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MVC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Se refiere a Modelo-Vista-Controlador, que es un patrón de arquitectura de software que separa los datos y la lógica de negocio de una aplicación de la interfaz de usuario</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stakeholders</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Son las personas que tienen un interés en el proyecto y que pueden influir en el mismo</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Es un formato de texto ligero para el intercambio de datos</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">arc42</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Es un estándar de documentación de arquitectura de software</p></td>
+</tr>
 </tbody>
 </table>
 <div style="page-break-after: always;"></div>
@@ -1698,7 +1727,7 @@ Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-02-24 09:15:37 +0100
+Last updated 2023-03-17 09:22:24 +0100
 </div>
 </div>
 </body>
