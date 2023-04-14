@@ -549,21 +549,56 @@ For documentation of your own system you use better the <em>plain</em> version.<
 <h2 id="section-introduction-and-goals">1. Introduction and Goals</h2>
 <div class="sectionbody">
 <div class="paragraph arc42help">
-<p>La petición del ayuntamiento de la ciudad de Bruselas es una aplicación que permita a sus ciudadanos tener un mapa
-donde puedan colocar marcadores en distintos sitios. Actualmente solo permite marcar sitios con un tipo de marcador pero posteriormente se podrán escoger diferentes tipos de marcadores dependiendo del lugar, los lugares posibles serán bares, restaurantes, monumentos, paisajes o miradores. Los ciudadanos podrán crear sus propios mapas personalizados y compartirlos con sus amigos.</p>
+<p>La petición del ayuntamiento de la ciudad de Bruselas es una aplicación que permita a sus ciudadanos tener un mapa donde puedan colocar marcadores en distintos sitios. Actualmente solo permite marcar sitios con diferentes tipos de marcadores dependiendo del lugar, los lugares posibles serán bares, restaurantes, monumentos, paisajes o tiendas. Los ciudadanos podrán crear sus propios mapas personalizados y compartirlos con sus amigos.</p>
 </div>
 <div class="sect2">
 <h3 id="_requirements_overview">1.1. Requirements Overview</h3>
-<div class="paragraph arc42help">
-<p>La aplicación deberá permitir a los usuarios añadir y visualizar en un mapa los diferentes marcadores dependiendo que tipo de lugar
-sea.Estos marcadores pueden tener asociadas tanto comentarios, puntuaciones y valoraciones, como fotos en la ubicación del marcador.</p>
+<div class="sect3 arc42help">
+<h4 id="_requisitos_de_alto_nivel">1.1.1. Requisitos de alto nivel:</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>La aplicación permitirá a los usuarios visualizar un mapa donde estos podrán añadir diferentes marcadores.</p>
+</li>
+<li>
+<p>Permitirá añadir diferentes tipos de marcadores dependiendo de si este se trata de un restaurante, un bar, un monumento, un paisaje o una tienda.</p>
+</li>
+<li>
+<p>En la creacion de estos marcadores se permitirá añadir comentarios o valoraciones, puntuaciones, fotos de estos lugares.</p>
+</li>
+<li>
+<p>La aplicación permitirá agregar amigos.</p>
+</li>
+<li>
+<p>Se podrá compartir los distintos marcadores con los amigos del usuario donde estos podrán ver las valoraciones, fotos, etc que este marcador tiene asociadas.</p>
+</li>
+<li>
+<p>El sistema permitirá utilizar filtros dentro del mapa ya sea por tipo de marcador o por amigo.</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<p>Por otra parte, los distintos usuarios pueden compartir sus mapas(con el conjunto de marcadores que tenga asociado) con sus amigos si así lo desean y ver las fotos,
-comentarios, valoraciones y todos los datos que este amigo ha publicado en los marcadores.</p>
 </div>
-<div class="paragraph">
-<p>La aplicación contará con un filtro para poder ver el mapa, por ejemplo, por categoría (si solo queremos ver las tiendas, restaurantes o cualquiera de los tipos de marcadores enumerados anteriormente), solo los marcadores de los amigos o de un amigo en concreto. Esta funcionalidad todavia no está disponible pero se implementara en próximas versiones.</p>
+<div class="sect3">
+<h4 id="_requisitos_opcionales">1.1.2. Requisitos opcionales</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Permitir crear rutas de marcadores.</p>
+</li>
+<li>
+<p>Permitir comparar mapas por categorias o tipos de marcadores.</p>
+</li>
+<li>
+<p>Permitir que los distintos establecimientos tengan un POD donde los usuarios se puedan conectar.</p>
+</li>
+<li>
+<p>Crear un mapa en conjunto, es decir, tener la posibilidad de que varios usuarios añadan marcadores a un mismo mapa.</p>
+</li>
+<li>
+<p>Añadir roles entre los diferentes usuarios, como pueden ser: ciudadano, turista y dueño de negocio.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1281,8 +1316,7 @@ on this list.</p>
 <div class="sect2">
 <h3 id="_seguridad">8.3. Seguridad</h3>
 <div class="paragraph">
-<p>La seguridad de la aplicación es una caracteristica muy importante de la que se hay de preocupar, sobre todo en cuanto lo
-que se refiere a la información sensible de los usuarios. En este caso, serán ellos mismos quienes tengan el control de todos sus datos mediante los pods, llevando a que la aplicación no guarde datos privados del usuario.</p>
+<p>La seguridad de la aplicación es una caracteristica muy importante de la que se hay de preocupar, sobre todo en cuanto lo que se refiere a la información sensible de los usuarios. En este caso, serán ellos mismos quienes tengan el control de todos sus datos mediante los pods, llevando a que la aplicación no guarde datos privados del usuario.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1294,7 +1328,7 @@ que se refiere a la información sensible de los usuarios. En este caso, serán 
 <div class="sect2">
 <h3 id="_testeabilidad">8.5. Testeabilidad</h3>
 <div class="paragraph">
-<p>La aplicación será testeada para comprobar y asegurar su correcto funcionamiento y ante cualquier nueva implementación se deberán realizar una serie de pruebas, tanto de funcionamiento como de usabilidad(tiempos de respuesta del usuario&#8230;&#8203;).</p>
+<p>La aplicación será testeada para comprobar y asegurar su correcto funcionamiento y ante cualquier nueva implementación se deberán realizar una serie de funcionalidad y rendiminto.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
