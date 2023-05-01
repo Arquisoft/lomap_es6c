@@ -1,5 +1,5 @@
 import { SCHEMA_INRUPT, RDF } from "@inrupt/vocab-common-rdf";
-
+import { getDefaultSession } from "@inrupt/solid-client-authn-browser";
 import {
     createSolidDataset,
     createThing,
@@ -26,7 +26,7 @@ export async function writeDataToNewDataSet(podUrl: string, thingName: string, t
   
     courseSolidDataset = setThing(courseSolidDataset, newThing);
   
-    await saveSolidDatasetAt(
+    const savedSolidDataset = await saveSolidDatasetAt(
         podUrl,
         courseSolidDataset,
         { fetch: session.fetch } // fetch from authenticated Session
@@ -58,7 +58,7 @@ export async function writeMarkerToDataSet(podUrl: string, marker: Marker, rdfTy
 
   courseSolidDataset = setThing(courseSolidDataset, thingToAdd);
 
-  await saveSolidDatasetAt(
+  const savedSolidDataset = await saveSolidDatasetAt(
       podUrl,
       courseSolidDataset,
       { fetch: session.fetch } // fetch from authenticated Session

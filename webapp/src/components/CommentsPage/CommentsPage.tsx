@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./CommentsPage.css";
 import { Marker } from "../Map/OSMap";
+import { getDefaultSession } from "@inrupt/solid-client-authn-browser";
 import { writeMarkerToDataSet } from "../Solid/WriteToPod";
 import { Rating } from "react-simple-star-rating";
 import { createAclForMarker } from "../Solid/Permissions";
@@ -26,7 +27,7 @@ export default function CommentsPage(props: any) {
       score: rating,
     };
 
-    const webId  = getSessionWebID().webId;
+    const { session, webId } = getSessionWebID();
 
     const markerUrl = webId + markerData.title;
 

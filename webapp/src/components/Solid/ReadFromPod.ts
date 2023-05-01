@@ -7,13 +7,14 @@ import {
     getUrlAll
   } from "@inrupt/solid-client";
 import * as solid from '@inrupt/solid-client'
+import { getDefaultSession } from "@inrupt/solid-client-authn-browser";
 import { SCHEMA_INRUPT } from "@inrupt/vocab-common-rdf";
 import { FOAF } from "@inrupt/vocab-common-rdf";
 import { getMarkersUrl, getSessionWebID } from "./Session";
 
 
 function isData(element : any, index : number, array: any) { 
-  return (element !== "No data"); 
+  return (element != "No data"); 
 }
 
 export async function readFromFriendDataSet(friendUrl : string) {
@@ -46,8 +47,7 @@ export async function readFromFriendDataSet(friendUrl : string) {
 
 
     // Crear una nueva lista
-    // eslint-disable-next-line @typescript-eslint/no-array-constructor
-    let newMarkers = new Array();
+    let newMarkers = new Array()
 
     for(let i = 0; i < markers.length; i++){
       markers[i].then((array: any) => {
@@ -111,7 +111,6 @@ export async function readFromDataSet() {
 
 
     // Crear una nueva lista
-    // eslint-disable-next-line @typescript-eslint/no-array-constructor
     let newMarkers = new Array()
 
     for(let i = 0; i < markers.length; i++){
@@ -162,14 +161,12 @@ export async function getFriendsFromPod() {
 
 function parseContent(content: any){
   const lines = content.split("\n")
-  // eslint-disable-next-line @typescript-eslint/no-array-constructor
   let prefixes = new Array()
   lines.forEach((e : string) => {
     if (e.includes("@prefix c"))
     prefixes.push(e)
   })
 
-  // eslint-disable-next-line @typescript-eslint/no-array-constructor
   let friends = new Array()
   prefixes.forEach((e : string) => {
     let url = e.split(": ")[1]
@@ -196,7 +193,6 @@ export async function getMyMarkers() {
     
     const markersDirectory = solid.getThingAll(myDataset);
     if (markersDirectory != null) {
-      // eslint-disable-next-line @typescript-eslint/no-array-constructor
       let markers = new Array()
 
       markersDirectory.forEach((marker) => {

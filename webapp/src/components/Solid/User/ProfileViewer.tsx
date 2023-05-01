@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import { getSessionWebID } from "../Session";
 
 const ProfileViewer = () => {
-  const webId = getSessionWebID().webId;
+  const { session, webId } = getSessionWebID();
 
   const buttonStyle = {
     marginTop: "2em",
