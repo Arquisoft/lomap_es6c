@@ -8,7 +8,7 @@ import "../FilterButton.css";
 export function FilterRestaurant() {
   const [markers, setMarkers] = useState(readFromDataSet());
   return (
-    <div>
+    <div id="div-restaurante">
       <button
         name="boton-restaurante"
         className="filter-button"
