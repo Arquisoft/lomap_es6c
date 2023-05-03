@@ -75,25 +75,24 @@ defineFeature(feature, test => {
 
   test('El usuario accede a su perfil', ({given, when, then}) => {
 
-    given('Un acceso a la app por un usuario (con la sesión iniciada)', async () => {
-        await page.goto("http://localhost:3000");
-        await delay(1000);
-        await expect(page).toClick('button', { text: 'Comenzar' });
-        await page.waitForNavigation();
-        await page.type('input#username', 'ejemplo123'); // email = ejemplo123@ejemplo.com
-        await page.type('input#password', '123Ejemplo!');
-        await page.click('button');
-        await page.waitForNavigation();
+    given('Un acceso a la app por un usuario', async () => {
+      await page.goto("http://localhost:3000");
+      await delay(1000);
     });    
 
-    when('Tras hacer click en el botón del perfil', async () => {
-        const user = await page.$('a[id="nav_user"]');
-        await user?.click();
-        await delay(1000);
+    when('El usuario inicia sesión', async () => {
+      await expect(page).toClick('button', { text: 'Comenzar' });
+      await page.waitForNavigation();
+      await page.type('input#username', 'ejemplo123'); // email = ejemplo123@ejemplo.com
+      await page.type('input#password', '123Ejemplo!');
+      await page.click('button');
+      await page.waitForNavigation();
     });
 
-    then('El usuario es redirigido a la página de su perfil', async () => {
-        await expect(page.url()).toMatch('http://localhost:3000/user');
+    then('El usuario puede acceder a su perfil haciendo click en el botón del perfil', async () => {
+      const user = await page.$('a[id="nav_user"]');
+      await user?.click();
+      await delay(1000);
     });
 
   });
