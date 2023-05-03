@@ -55,6 +55,84 @@ defineFeature(feature, test => {
 
   });
 
+  test('El usuario accede a la página de información', ({given, when, then}) => {
+
+    given('Un acceso a la app por un usuario', async () => {
+      await page.goto("http://localhost:3000");
+    });    
+
+    when('Tras hacer click en el botón de información', async () => {     
+        const info = await page.$('a[id="nav_about"]');
+        await info?.click();
+    });
+
+    then('El usuario es redirigido a la página de información sobre nosotros', async () => {
+        const aboutPage = await page.$eval(".about", (e) => e.textContent);
+        expect(aboutPage).toContain('Sobre Nosotros - LoMap_ES6C');
+    });
+
+  });
+
+  test('El usuario accede a su perfil', ({given, when, then}) => {
+
+    given('Un acceso a la app por un usuario (con la sesión iniciada)', async () => {
+        await page.goto("http://localhost:3000");
+        await delay(1000);
+        await expect(page).toClick('button', { text: 'Comenzar' });
+        await page.waitForNavigation();
+        await page.type('input#username', 'ejemplo123'); // email = ejemplo123@ejemplo.com
+        await page.type('input#password', '123Ejemplo!');
+        await page.click('button');
+        await page.waitForNavigation();
+    });    
+
+    when('Tras hacer click en el botón del perfil', async () => {
+        const user = await page.$('a[id="nav_user"]');
+        await user?.click();
+        await delay(1000);
+    });
+
+    then('El usuario es redirigido a la página de su perfil', async () => {
+        await expect(page.url()).toMatch('http://localhost:3000/user');
+    });
+
+  });
+
+  test('El usuario añade un comentario a su mapa', ({given, when, then, and}) => {
+
+    given('Un acceso a la app por un usuario', async () => {
+        await page.goto("http://localhost:3000");
+    });    
+
+    when('El usuario inicia sesión y accede a su mapa', async () => {
+        await expect(page).toClick('button', { text: 'Comenzar' });
+        await page.waitForNavigation();
+        /*await page.type('input#username', 'ejemplo123'); // email = ejemplo123@ejemplo.com
+        await page.type('input#password', '123Ejemplo!');
+        await page.click('button');
+        await page.waitForNavigation();*/
+        const user = await page.$('a[id="nav_user"]');
+        await user?.click();
+        await delay(1000);
+        const mapa = await page.$('a[id="mapa"]');
+        await mapa?.click();
+        await delay(1000);
+    });
+
+    then('El usuario selecciona una posición en el mapa', async () => {
+        const mapa = await page.$('div[class="map"]');
+        await mapa?.click();
+        await delay(1000);
+    });
+
+    and('Añade el nuevo comentario', async () => {
+        const name = await page.$('input[id="makerTitle"]');
+        await name?.type("Cervecería");
+        await page.click('button');
+    });
+
+  });
+
   test('El usuario accede a la página de documentación', ({given, when, then}) => {
 
     given('Un acceso a la app por un usuario', async () => {
@@ -71,24 +149,6 @@ defineFeature(feature, test => {
         await expect(page.url()).toMatch('https://arquisoft.github.io/lomap_es6c/');
         const docu = await page.$eval("title",  (e) => e.textContent);
         expect(docu).toContain('LOMAP ES6C');
-    });
-
-  });
-
-  test('El usuario accede a la página de información', ({given, when, then}) => {
-
-    given('Un acceso a la app por un usuario', async () => {
-      await page.goto("http://localhost:3000");
-    });    
-
-    when('Tras hacer click en el botón de información', async () => {     
-        const info = await page.$('a[id="nav_about"]');
-        await info?.click();
-    });
-
-    then('El usuario es redirigido a la página de información sobre nosotros', async () => {
-        const aboutPage = await page.$eval(".about", (e) => e.textContent);
-        expect(aboutPage).toContain('Sobre Nosotros - LoMap_ES6C');
     });
 
   });
