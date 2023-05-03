@@ -20,6 +20,11 @@ Scenario: El usuario accede a su perfil
   When Tras hacer click en el botón del perfil
   Then El usuario es redirigido a la página de su perfil
 
+Scenario: El usuario accede a su mapa desde su perfil
+  Given Un acceso al perfil de la app por un usuario (con la sesión iniciada)
+  When Tras hacer click en el enlace al mapa
+  Then El usuario es redirigido a la página principal con vista de su mapa
+
 Scenario: El usuario añade un comentario a su mapa
   Given Un acceso a la app por un usuario
   When El usuario inicia sesión y accede a su mapa

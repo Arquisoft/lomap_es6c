@@ -98,6 +98,35 @@ defineFeature(feature, test => {
 
   });
 
+  test('El usuario accede a su mapa desde su perfil', ({given, when, then}) => {
+
+    given('Un acceso al perfil de la app por un usuario (con la sesión iniciada)', async () => {
+        await page.goto("http://localhost:3000");
+        await delay(1000);
+        await expect(page).toClick('button', { text: 'Comenzar' });
+        await page.waitForNavigation();
+        /*await page.type('input#username', 'ejemplo123'); // email = ejemplo123@ejemplo.com
+        await page.type('input#password', '123Ejemplo!');
+        await page.click('button');
+        await page.waitForNavigation();*/
+        const user = await page.$('a[id="nav_user"]');
+        await user?.click();
+        await delay(1000);
+    });    
+
+    when('Tras hacer click en el enlace al mapa', async () => {
+        const mapa = await page.$('a[id="mapa"]');
+        await mapa?.click();
+        await delay(1000);
+    });
+
+    then('El usuario es redirigido a la página principal con vista de su mapa', async () => {
+        const mapa = await page.$eval("h1",  (e) => e.textContent);
+        expect(mapa).toContain('MapIdentifier');
+    });
+
+  });
+
   test('El usuario añade un comentario a su mapa', ({given, when, then, and}) => {
 
     given('Un acceso a la app por un usuario', async () => {
