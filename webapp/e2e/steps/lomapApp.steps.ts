@@ -127,9 +127,44 @@ defineFeature(feature, test => {
 
   });
 
+  test('El usuario busca a un amigo desde su perfil', ({given, when, then, and}) => {
+
+    given('Un acceso al perfil de la app por un usuario (con la sesión iniciada)', async () => {
+        await page.goto("http://localhost:3000");
+        await delay(1000);
+        await expect(page).toClick('button', { text: 'Comenzar' });
+        await page.waitForNavigation();
+        /*await page.type('input#username', 'ejemplo123'); // email = ejemplo123@ejemplo.com
+        await page.type('input#password', '123Ejemplo!');
+        await page.click('button');
+        await page.waitForNavigation();*/
+        const user = await page.$('a[id="nav_user"]');
+        await user?.click();
+        await delay(1000);
+    });    
+
+    when('Tras hacer click en el botón amigos', async () => {
+        await expect(page).toClick('a', { text: 'Amigos' });
+        await delay(1000);
+    });
+
+    then('El usuario es redirigido al buscador de amigos', async () => {
+        const buscador = await page.$eval("label",  (e) => e.textContent);
+        expect(buscador).toContain('¿A quién quieres agregar?');
+    });
+
+    and('Al buscar un amigo es redirigido a su perfil de Solid', async () => {
+        const name = await page.$('input[id="friend"]');
+        await name?.type("teresa");
+        await page.click('button');
+    });
+
+  });
+
   test('El usuario añade un comentario a su mapa', ({given, when, then, and}) => {
 
     given('Un acceso a la app por un usuario', async () => {
+        page = await browser.newPage();
         await page.goto("http://localhost:3000");
     });    
 

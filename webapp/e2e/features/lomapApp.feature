@@ -25,6 +25,12 @@ Scenario: El usuario accede a su mapa desde su perfil
   When Tras hacer click en el enlace al mapa
   Then El usuario es redirigido a la página principal con vista de su mapa
 
+Scenario: El usuario busca a un amigo desde su perfil
+  Given Un acceso al perfil de la app por un usuario (con la sesión iniciada)
+  When Tras hacer click en el botón amigos
+  Then El usuario es redirigido al buscador de amigos
+  And Al buscar un amigo es redirigido a su perfil de Solid
+
 Scenario: El usuario añade un comentario a su mapa
   Given Un acceso a la app por un usuario
   When El usuario inicia sesión y accede a su mapa
