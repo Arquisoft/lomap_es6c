@@ -1,10 +1,16 @@
-import { readFromDataSetUrl } from "./ReadFromPod";
+import { readFromDataSetUrl, getAllFriendsFromPod} from "./ReadFromPod";
 
 jest.mock("@inrupt/solid-client", () => ({
 	getSolidDataset: (datasetUrl: any, fetch: any) => ({
 		dbMarkers
 	}),
   getThingAll: (dataset: any) => ([{
+    dbMarkers
+  }]),
+  getThing: (dataset: any, webId: any) => ([{
+    dbMarkers
+  }]),
+  getUrlAll: (profile: any, FOAF: any) => ([{
     dbMarkers
   }]),
   getStringNoLocale: (thing: any, field: string) => {
@@ -37,6 +43,15 @@ describe('readFromFriendDataSet', () => {
       // Aquí ejecutas la función y compruebas que devuelve lo que esperas
       const markers = await readFromDataSetUrl('https://campa.inrupt.net/public/');
       expect(markers).toEqual([]);
+    });
+
+  });
+
+  describe('getAllFriendsFromPod', () => {
+    it('no hay amigos', async () => {
+      // Aquí ejecutas la función y compruebas que devuelve lo que esperas
+      const markers = await getAllFriendsFromPod();
+      expect(markers?.length).toBeGreaterThan(0);
     });
 
   });
