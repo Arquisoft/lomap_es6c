@@ -23,11 +23,11 @@ export default function FilterHamburger(props: any){
   </label>
 
   
-  <div className="menu-item-hamburger"> <Markers /> </div>
-  <div className="menu-item-hamburger"> <FilterRestaurant /> </div>
-  <div className="menu-item-hamburger"> <FilterMonument /> </div>
-  <div className="menu-item-hamburger"> <FilterLandscape /> </div>
-  <div className="menu-item-hamburger"> <GetFriendMarkers changeFriendFilter={changeFriendFilter}/> </div>
+  <div className="menu-item-hamburger"> <Markers changeLoading={props.changeLoading} changeMarkerInfo={props.changeMarkerInfo}/> </div>
+  <div className="menu-item-hamburger"> <FilterRestaurant changeLoading={props.changeLoading} changeMarkerInfo={props.changeMarkerInfo}/> </div> 
+  <div className="menu-item-hamburger"> <FilterMonument changeLoading={props.changeLoading} changeMarkerInfo={props.changeMarkerInfo}/> </div>
+  <div className="menu-item-hamburger"> <FilterLandscape changeLoading={props.changeLoading} changeMarkerInfo={props.changeMarkerInfo}/> </div>
+  <div className="menu-item-hamburger"> <GetFriendMarkers changeLoading={props.changeLoading} changeFriendFilter={changeFriendFilter}/> </div>
 
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
     <defs>

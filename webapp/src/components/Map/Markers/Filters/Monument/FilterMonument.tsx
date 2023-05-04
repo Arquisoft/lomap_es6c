@@ -1,19 +1,27 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { useState } from "react";
-import { readFromDataSet } from "../../../../Solid/ReadFromPod";
+import { readFromDataSetUrl} from "../../../../Solid/ReadFromPod";
 import { clearMarkers, ShowMarkersFromPromise } from "../../../OSMap";
 import { filterByType } from "../Filter";
 import "../FilterButton.css"
+import { getSessionWebID } from "../../../../Solid/Session";
 
-export function FilterMonument() {
-    const [markers, setMarkers] = useState(readFromDataSet());
+export function FilterMonument(props: any) {
+    const [markers,] = useState(readFromDataSetUrl(getSessionWebID().webId));
+
+    const loadMonuments = async () => {
+      props.changeLoading();
+      clearMarkers();
+      ShowMarkersFromPromise(filterByType(markers, "monument"), props.changeMarkerInfo, props.changeLoading);
+      props.changeLoading();
+    };
+
     return (
       <div>
         <button className="filter-button"
           onClick={async () => {
-            clearMarkers();
-            setMarkers(readFromDataSet());
-            ShowMarkersFromPromise(filterByType(markers, "monument"));
+            props.changeLoading();
+            await loadMonuments();
           }}
         >
         <img className = "filter-button-image" src="https://cdn-icons-png.flaticon.com/512/1321/1321018.png" />

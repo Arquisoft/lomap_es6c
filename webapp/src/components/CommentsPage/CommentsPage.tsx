@@ -28,7 +28,7 @@ export default function CommentsPage(props: any) {
 
     const webId  = getSessionWebID().webId;
 
-    const markerUrl = webId + markerData.title;
+    const markerUrl = webId.replace(/\/profile\/card#me/, '/public/markers/') + markerData.title;
 
     await writeMarkerToDataSet(
       markerUrl,
@@ -36,7 +36,7 @@ export default function CommentsPage(props: any) {
       "https://schema.org/location"
     );
 
-    createAclForMarker(markerUrl);
+    await createAclForMarker(markerUrl);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -48,7 +48,7 @@ export default function CommentsPage(props: any) {
       rating: { value: number };
     };
 
-    writeMarkerToPod(
+    await writeMarkerToPod(
       target.markerTitle.value,
       target.comment.value,
       markerType,
@@ -56,15 +56,10 @@ export default function CommentsPage(props: any) {
     );
 
     // quitar componente comentarios
-    props.onSubmit();
+    props.onSubmit(markerType);
   };
 
   const [rating, setRating] = useState(0);
-
-  const onPointerEnter = () => console.log("Enter");
-  const onPointerLeave = () => console.log("Leave");
-  const onPointerMove = (value: number, index: number) =>
-    console.log(value, index);
 
   // Catch Rating value
   const handleRating = (rate: number) => {
@@ -102,7 +97,7 @@ export default function CommentsPage(props: any) {
               />
             </div>
             <div className="form_field">
-              <label htmlFor="marker-options">Tipo de marcador</label>
+              <label htmlFor="marker-options">Tipo: </label>
               <select
                 name="marker-options"
                 id="marker-options"
@@ -126,12 +121,9 @@ export default function CommentsPage(props: any) {
             </div>
 
             <div>
-              <label htmlFor="score">Puntuación:</label>
+              <label htmlFor="score"></label>
               <Rating
                 onClick={handleRating}
-                onPointerEnter={onPointerEnter}
-                onPointerLeave={onPointerLeave}
-                onPointerMove={onPointerMove}
               />
             </div>
 

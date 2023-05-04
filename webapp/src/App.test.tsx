@@ -55,14 +55,13 @@ test("commentsPage renders correctly", () => {
   const cancel_button_img = screen.getByRole("img");
   const title = screen.getByText("Crear marcador");
   const name = screen.getByText("Titulo del marcador:");
-  const type = screen.getByText("Tipo de marcador");
+  const type = screen.getByText("Tipo:");
   const pub = screen.getByRole("option", { name: "Bar o restaurante" });
   const monument = screen.getByRole("option", { name: "Monumento" });
   const landscape = screen.getByRole("option", { name: "Paisaje / Mirador" });
   const comment_area = screen.getByPlaceholderText(
     "Escribe tu comentario aquí"
   );
-  const rating = screen.getByText("Puntuación:");
   const submit = screen.getByRole("button", { name: "Enviar" });
 
   expect(cancel_button_img).toBeInTheDocument();
@@ -73,7 +72,6 @@ test("commentsPage renders correctly", () => {
   expect(monument).toBeInTheDocument();
   expect(landscape).toBeInTheDocument();
   expect(comment_area).toBeInTheDocument();
-  expect(rating).toBeInTheDocument();
   expect(submit).toBeInTheDocument();
 });
 
@@ -242,18 +240,17 @@ describe("CommentsPage", () => {
       onSubmit: jest.fn(),
       onChange: jest.fn(),
     };
-
+ 
     const { getByText, getByLabelText, getByPlaceholderText, getAllByRole } =
       render(<CommentsPage {...props} />);
 
     // Verifica que los elementos principales se renderizaron correctamente
     expect(getByText("Crear marcador")).toBeInTheDocument();
     expect(getByLabelText("Titulo del marcador:")).toBeInTheDocument();
-    expect(getByLabelText("Tipo de marcador")).toBeInTheDocument();
+    expect(getByLabelText("Tipo:")).toBeInTheDocument();
     expect(
       getByPlaceholderText("Escribe tu comentario aquí")
     ).toBeInTheDocument();
-    expect(getByText("Puntuación:")).toBeInTheDocument();
     expect(getByText("Enviar")).toBeInTheDocument();
     expect(getAllByRole("button")[0]).toBeInTheDocument();
   });

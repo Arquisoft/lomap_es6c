@@ -1,6 +1,6 @@
 import * as solid from '@inrupt/solid-client'
 import { getMarkersUrl, getSessionWebID } from './Session';
-import { getMyMarkers } from './ReadFromPod';
+import { readFromDataSetUrl } from './ReadFromPod';
 
 // Crear una acl
 export const createAclForMarkers = async () => {
@@ -10,6 +10,7 @@ export const createAclForMarkers = async () => {
   // Obtener la url del dataset de marcadores
   const datasetUrl = getMarkersUrl(webId)
 
+  console.log(datasetUrl);
   try {
     let file: any = await solid.getFile(datasetUrl, { fetch: session.fetch })
 
@@ -28,7 +29,6 @@ export const createAclForMarkers = async () => {
 // Crear un acl con permisos de owner para cada uno de los marcadores del dataset
 export const createAclForMarker = async (markerUrl: string) => {
   const {session, webId} = getSessionWebID()
-  console.log("vamos a crear un acl para el marker: " + markerUrl)
 
   try {
     let file: any = await solid.getFile(markerUrl, { fetch: session.fetch })
@@ -38,8 +38,6 @@ export const createAclForMarker = async (markerUrl: string) => {
     const updatedAcl = solid.setAgentResourceAccess(acl, webId, { read: true, append: true, write: true, control: true })
 
     await solid.saveAclFor(file, updatedAcl, { fetch: session.fetch })
-
-    console.log("acl creado para el marker: " + markerUrl)
 
   } catch (error) {
     console.log(error)
@@ -81,14 +79,16 @@ export const deleteAclForMarker = async (datasetUrl : string) => {
 }
 
 // Darle permisos de escritura y lectura a un amigo
-export const addFriendPermissionsToMarker = async (friendWebId: string, datasetUrl : string) => {
+export const addFriendPermissionsToMarker = async (friendWebId: string, marker: any) => {
   
-  const {session} = getSessionWebID()
+  const {session, webId} = getSessionWebID()
+  const markerUrl = webId.replace(/\/profile\/card#me/, '/public/markers/' + marker.title);
 
   console.log("vamos a darle permisos de escritura y lectura a un amigo")
-  
-    try {
-      let datasetWithAcl: any = await solid.getSolidDatasetWithAcl(datasetUrl, { fetch: session.fetch })
+  console.log(friendWebId);
+  console.log(markerUrl);
+  try {
+      let datasetWithAcl: any = await solid.getSolidDatasetWithAcl(markerUrl, { fetch: session.fetch })
   
       let acl = solid.getResourceAcl(datasetWithAcl)
   
@@ -99,20 +99,19 @@ export const addFriendPermissionsToMarker = async (friendWebId: string, datasetU
       console.log("Permisos de escritura y lectura dados a un amigo")
 
     } catch (error) {
-      createAclForMarker(datasetUrl)
+      createAclForMarker(markerUrl)
     }
   
   }
 
 // Quitar los permisos de lectura y escritura a un amigo
-export const removeFriendPermissionsToMarkers = async (friendWebId: string, datasetUrl : string) => {
+export const removeFriendPermissionsToMarkers = async (friendWebId: string, marker : any) => {
     
-  const {session} = getSessionWebID()
+  const {session, webId} = getSessionWebID()
+  const markerUrl = webId.replace(/\/profile\/card#me/, '/public/markers/' + marker.title);
 
-  console.log("vamos a quitarle permisos de escritura y lectura a un amigo")
-  
     try {
-      let datasetWithAcl: any = await solid.getSolidDatasetWithAcl(datasetUrl, { fetch: session.fetch })
+      let datasetWithAcl: any = await solid.getSolidDatasetWithAcl(markerUrl, { fetch: session.fetch })
   
       let acl = solid.getResourceAcl(datasetWithAcl)
   
@@ -129,7 +128,7 @@ export const removeFriendPermissionsToMarkers = async (friendWebId: string, data
 }
 
 export const removeFriendPermissionsForAllMarkers = async (friendWebId: string) => {
-  const markers = await getMyMarkers()
+  const markers = await readFromDataSetUrl(getSessionWebID().webId)
 
   if (markers !== undefined) {
     markers.forEach(async (marker) => {
@@ -139,13 +138,11 @@ export const removeFriendPermissionsForAllMarkers = async (friendWebId: string) 
 }
 
 export const addFriendPermissionsForAllMarkers = async (friendWebId: string) => {
-  const markers = await getMyMarkers()
-
-  
+  const markers = await readFromDataSetUrl(getSessionWebID().webId)
 
   if (markers !== undefined) {
-    markers.forEach(async (marker) => {
+    for (const marker of markers) {
       await addFriendPermissionsToMarker(friendWebId, marker)
-    })
+    }
   }
 }

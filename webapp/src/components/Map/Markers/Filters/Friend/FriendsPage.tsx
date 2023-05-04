@@ -1,34 +1,43 @@
 import { useEffect, useState } from "react";
-import { getFriendsFromPod, readFromDataSet, readFromFriendDataSet } from "../../../../Solid/ReadFromPod";
+import { getAllFriendsFromPod, readFromDataSetUrl} from "../../../../Solid/ReadFromPod";
 import { ShowMarkersFulfilledPromise } from "../../../OSMap";
 import "./FriendsPage.css";
 export default function FriendsPage(props: any){
 
-    const [markers, setMarkers] = useState(readFromDataSet());
+    const [, setMarkers] = useState<any[]>([]);
     const [friends, setFriends] = useState([]);
 
-    function readFromFriend(url: string){
-        setMarkers(readFromFriendDataSet(url));
-        markers.then((array: any) => {
-          ShowMarkersFulfilledPromise(array);
-        });
+    var markersToAdd: any[] = [];
+    async function readFromFriend(url: string) {
+      try {
+        const markersArray = await readFromDataSetUrl(url);
+        markersToAdd = markersArray;
+      } catch (error) {
+        console.error(error);
+        setMarkers([]);
       }
-
+    }
+    
     const cancelFilter = () => {
         props.onChange();
       };
 
-
     const getAllFriends = () => {
-        getFriendsFromPod().then((friends: any) => {
+        getAllFriendsFromPod().then((friends: any) => {
             setFriends(friends);
         });
     }
 
-    const clickOnFriend = (friend: string): any => {
-        readFromFriend(friend);
-        props.changeMapName(getFriendName(friend));
-        cancelFilter();
+    const clickOnFriend = async (friend: string) => {
+        props.changeLoading();
+        try{
+          await readFromFriend(friend);
+          ShowMarkersFulfilledPromise(markersToAdd, props.changeMarkerInfo, props.changeLoading);
+        } catch (error) {
+          console.log(error);
+        } finally{
+          cancelFilter();
+        }
     }
     
     useEffect(() => {
@@ -50,7 +59,7 @@ export default function FriendsPage(props: any){
               <img className="cancel-button-img" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffreesvg.org%2Fimg%2Fmatt-icons_cancel.png&f=1&nofb=1&ipt=a1d797bc36ec42f99a52e4084bffc7c616bf0eee54d60f835aa29f7ba578a938&ipo=images" alt="" />
             </button>
             <div>
-            <div>
+            <div className="friends">
                 {friends.map((friend) => ( <div className ="friend-button-container">
                     <button className ="friend-button" key={friend} onClick={() => clickOnFriend(friend)}>
                     </button>

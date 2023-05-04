@@ -90,3 +90,9 @@ textarea {
   display: inline-block;
   margin-left: 10px;
 }
+
+.friends{
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
