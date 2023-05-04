@@ -1,4 +1,4 @@
-import { readFromFriendDataSet } from "./ReadFromPod";
+import { readFromDataSetUrl } from "./ReadFromPod";
 
 jest.mock("@inrupt/solid-client", () => ({
 	getSolidDataset: (datasetUrl: any, fetch: any) => ({
@@ -35,7 +35,7 @@ const dbMarkers = [
 describe('readFromFriendDataSet', () => {
     it('no hay marcadores en el pod', async () => {
       // Aquí ejecutas la función y compruebas que devuelve lo que esperas
-      const markers = await readFromFriendDataSet('https://campa.inrupt.net/public/');
+      const markers = await readFromDataSetUrl('https://campa.inrupt.net/public/');
       expect(markers).toEqual([]);
     });
 
