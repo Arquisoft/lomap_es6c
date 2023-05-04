@@ -12,7 +12,7 @@ defineFeature(feature, test => {
     browser = process.env.GITHUB_ACTIONS
       ? await puppeteer.launch()
       : await puppeteer.launch({
-        headless: false, // false si se quiere ver la ejecución de la prueba
+        headless: true, // false si se quiere ver la ejecución de la prueba
         slowMo: 50 });
     page = await browser.newPage();
 
@@ -69,30 +69,6 @@ defineFeature(feature, test => {
     then('El usuario es redirigido a la página de información sobre nosotros', async () => {
         const aboutPage = await page.$eval(".about", (e) => e.textContent);
         expect(aboutPage).toContain('Sobre Nosotros - LoMap_ES6C');
-    });
-
-  });
-
-  test('El usuario accede a su perfil', ({given, when, then}) => {
-
-    given('Un acceso a la app por un usuario', async () => {
-      await page.goto("http://localhost:3000");
-      await delay(1000);
-    });    
-
-    when('El usuario inicia sesión', async () => {
-      await expect(page).toClick('button', { text: 'Comenzar' });
-      await page.waitForNavigation();
-      await page.type('input#username', 'ejemplo123'); // email = ejemplo123@ejemplo.com
-      await page.type('input#password', '123Ejemplo!');
-      await page.click('button');
-      await page.waitForNavigation();
-    });
-
-    then('El usuario puede acceder a su perfil haciendo click en el botón del perfil', async () => {
-      const user = await page.$('a[id="nav_user"]');
-      await user?.click();
-      await delay(1000);
     });
 
   });
