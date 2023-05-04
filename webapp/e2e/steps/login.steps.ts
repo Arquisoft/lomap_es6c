@@ -12,7 +12,7 @@ defineFeature(feature, (test) => {
         browser = process.env.GITHUB_ACTIONS
           ? await puppeteer.launch()
           : await puppeteer.launch({
-            headless: false, // false si se quiere ver la ejecución de la prueba
+            headless: true, // false si se quiere ver la ejecución de la prueba
             slowMo: 50 });
         page = await browser.newPage();
     
@@ -21,28 +21,52 @@ defineFeature(feature, (test) => {
         }).catch(() => {});
     });
 
-    test('El usuario introduce correctamente sus credenciales', ({given, when, then, and}) => {
+    test('El usuario introduce incorrectamente sus credenciales', ({given, when, then, and}) => {
 
-        given('el usuario se encuentra en la página de inicio de sesión', async () => {
-            // await page.goto("http://localhost:3000/");
-            // await page.waitForNavigation();
+        given('el usuario accede a la aplicación', async () => {
+            await expect(page.url()).toMatch('http://localhost:3000');
         });
 
-        when('el usuario hace click sobre el botón LOGIN y es redirigido a la página de Inrupt', async () => {
-            // await expect(page).toClick('button');
-            // await page.waitForNavigation();
+        when('el usuario hace click sobre el botón Comenzar y es redirigido a la página de Inrupt', async () => {    
+            const info = await page.$('button[name="Login"]');
+            await info?.click();
+            await page.waitForNavigation();
+        });
+
+        then('el usuario introduce su usuario y contraseña incorrectamente', async () => {
+            await page.type('input#password', '123Ejemplo!');
+            await page.click('button');
+        });
+
+        and('el usuario visualiza un mensaje de error', async () => {
+            const errorMessage = await page.$eval('strong', (el) => el.textContent);
+            expect(errorMessage).toMatch('Username required');
+        });
+    });
+
+    test('El usuario introduce correctamente sus credenciales', ({given, when, then, and}) => {
+
+        given('el usuario accede a la aplicación', async () => {
+            await page.goto("http://localhost:3000");
+            await page.waitForNavigation();
+        });
+
+        when('el usuario hace click sobre el botón Comenzar y es redirigido a la página de Inrupt', async () => {
+            const info = await page.$('button[name="Login"]');
+            await info?.click();
+            await page.waitForNavigation();
         });
 
         then('el usuario introduce su usuario y contraseña correctamente e inicia sesión', async () => {
-            // await page.type('input#username', 'ejemplo123'); // email = ejemplo123@ejemplo.com
-            // await page.type('input#password', '123Ejemplo!');
-            // await page.click('button');
-            // await page.waitForNavigation();
+            await page.type('input#username', 'ejemplo123'); // email = ejemplo123@ejemplo.com
+            await page.type('input#password', '123Ejemplo!');
+            await page.click('button');
+            await page.waitForNavigation();
         });
 
         and('el usuario puede visualizar su perfil en la app', async () => {
-            // await page.goto("http://localhost:3000/user");
-            // await page.waitForNavigation();
+            await page.goto("http://localhost:3000/user");
+            await page.waitForNavigation();
         });
     });
 
