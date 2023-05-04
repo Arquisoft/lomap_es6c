@@ -69,10 +69,12 @@ export function OSMap() {
   function invertMarkerInfo(){
     setMarkerInfo(!markerInfo);
   }
+
   function changeMarkerInfo(event: LeafletMouseEvent) {
     setMarker(event.target);
     invertMarkerInfo();
   }
+
   function changeLoading(){
     setIsLoading((prevIsLoading) => {
       const newIsLoading = !prevIsLoading;
@@ -85,6 +87,7 @@ export function OSMap() {
       click: (e) => {
         const { lat, lng } = e.latlng;
         setCords([lat, lng]);
+
         setMarkerForm(true);
       },
     });
@@ -103,7 +106,6 @@ export function OSMap() {
     setMarkerForm(false);
   }
 
-
   return (
     <div className="map" style={{ position: "relative", height: "65vh" }}>
     {isLoading && (
@@ -115,7 +117,7 @@ export function OSMap() {
         <div className="filters">
          <FilterHamburger changeLoading={changeLoading} changeFriendFilter={changeFriendFilter} changeMarkerInfo={changeMarkerInfo}/>
         </div>
-        <MapContainer 
+        <MapContainer
           center={[51.505, -0.09]}
           zoom={13}
           style={{ height: "65vh", borderRadius: "inherit" }}

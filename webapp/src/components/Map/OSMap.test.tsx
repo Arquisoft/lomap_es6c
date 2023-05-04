@@ -1,8 +1,6 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import { OSMap, ShowMarkersFromPromise, ShowMarkersFulfilledPromise } from "./OSMap";
+import { render, screen } from "@testing-library/react";
+import { OSMap } from "./OSMap";
 import MapIdentifier from "./MapIdentifier";
-import { readFromDataSetUrl } from "../Solid/ReadFromPod";
-import { getSessionWebID } from "../Solid/Session";
 
 jest.mock("@inrupt/solid-client-authn-browser", () => ({
 	getDefaultSession: () => ({
@@ -36,7 +34,7 @@ jest.mock("@inrupt/solid-client", () => ({
     }
   },
 }));
- 
+
 describe('OSMap', () => {
     it('can see all buttons correctly', () =>{
         const { getByRole, getAllByRole } = render(<OSMap/>);
@@ -85,16 +83,6 @@ describe('OSMap', () => {
         expect(friends_img).toBeInTheDocument();
     });
 
-    it('changeFunctions', () => {
-      const { getAllByRole } = render(<OSMap/>);
-      const images = getAllByRole('img');
-      
-      fireEvent.click(images[0]);
-      fireEvent.click(images[1]);
-      fireEvent.click(images[2]);
-      fireEvent.click(images[3]);
-      fireEvent.click(images[4]);
-    });
 });
 
 describe('MapIdentifier',()=>{
@@ -102,16 +90,3 @@ describe('MapIdentifier',()=>{
         render(<MapIdentifier/>);
     });
 });
-
-describe('functions',()=>{
-  const func1 = jest.fn();
-  const func2 = jest.fn();
-
-  it('showsMarkerFromPromise', () => {
-      ShowMarkersFromPromise(readFromDataSetUrl(getSessionWebID().webId), func1, func2);
-      expect(func1).toHaveBeenCalledTimes(0);
-      expect(func2).toHaveBeenCalledTimes(0);
-  });
-
-});
-

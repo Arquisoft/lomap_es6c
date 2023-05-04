@@ -49,6 +49,7 @@ describe('readFromFriendDataSet', () => {
 
   describe('getAllFriendsFromPod', () => {
     it('no hay amigos', async () => {
+      // Aquí ejecutas la función y compruebas que devuelve lo que esperas
       const markers = await getAllFriendsFromPod();
       expect(markers?.length).toBeGreaterThan(0);
     });
