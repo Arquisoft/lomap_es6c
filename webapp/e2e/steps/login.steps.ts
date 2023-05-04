@@ -27,8 +27,9 @@ defineFeature(feature, (test) => {
             await expect(page.url()).toMatch('http://localhost:3000');
         });
 
-        when('el usuario hace click sobre el botón Comenzar y es redirigido a la página de Inrupt', async () => {
-            await expect(page).toClick('button', { text: 'Comenzar' });
+        when('el usuario hace click sobre el botón Comenzar y es redirigido a la página de Inrupt', async () => {    
+            const info = await page.$('button[name="Login"]');
+            await info?.click();
             await page.waitForNavigation();
         });
 
@@ -51,7 +52,8 @@ defineFeature(feature, (test) => {
         });
 
         when('el usuario hace click sobre el botón Comenzar y es redirigido a la página de Inrupt', async () => {
-            await expect(page).toClick('button', { text: 'Comenzar' });
+            const info = await page.$('button[name="Login"]');
+            await info?.click();
             await page.waitForNavigation();
         });
 

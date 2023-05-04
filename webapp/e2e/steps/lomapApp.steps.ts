@@ -81,7 +81,8 @@ defineFeature(feature, test => {
     });    
 
     when('El usuario inicia sesión', async () => {
-      await expect(page).toClick('button', { text: 'Comenzar' });
+      const info = await page.$('button[name="Login"]');
+      await info?.click();
       await page.waitForNavigation();
       await page.type('input#username', 'ejemplo123'); // email = ejemplo123@ejemplo.com
       await page.type('input#password', '123Ejemplo!');
@@ -102,7 +103,8 @@ defineFeature(feature, test => {
     given('Un acceso al perfil de la app por un usuario (con la sesión iniciada)', async () => {
         await page.goto("http://localhost:3000");
         await delay(1000);
-        await expect(page).toClick('button', { text: 'Comenzar' });
+        const info = await page.$('button[name="Login"]');
+        await info?.click();
         await page.waitForNavigation();
         /*await page.type('input#username', 'ejemplo123'); // email = ejemplo123@ejemplo.com
         await page.type('input#password', '123Ejemplo!');
@@ -131,7 +133,8 @@ defineFeature(feature, test => {
     given('Un acceso al perfil de la app por un usuario (con la sesión iniciada)', async () => {
         await page.goto("http://localhost:3000");
         await delay(1000);
-        await expect(page).toClick('button', { text: 'Comenzar' });
+        const info = await page.$('button[name="Login"]');
+        await info?.click();
         await page.waitForNavigation();
         /*await page.type('input#username', 'ejemplo123'); // email = ejemplo123@ejemplo.com
         await page.type('input#password', '123Ejemplo!');
@@ -168,7 +171,8 @@ defineFeature(feature, test => {
     });    
 
     when('El usuario inicia sesión y accede a su mapa', async () => {
-        await expect(page).toClick('button', { text: 'Comenzar' });
+        const info = await page.$('button[name="Login"]');
+        await info?.click();
         await page.waitForNavigation();
         /*await page.type('input#username', 'ejemplo123'); // email = ejemplo123@ejemplo.com
         await page.type('input#password', '123Ejemplo!');
