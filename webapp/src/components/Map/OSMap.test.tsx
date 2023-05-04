@@ -1,6 +1,8 @@
-import { render, screen } from "@testing-library/react";
-import { OSMap } from "./OSMap";
+import { fireEvent, render, screen } from "@testing-library/react";
+import { OSMap, ShowMarkersFromPromise } from "./OSMap";
 import MapIdentifier from "./MapIdentifier";
+import { readFromDataSetUrl } from "../Solid/ReadFromPod";
+import { getSessionWebID } from "../Solid/Session";
 
 jest.mock("@inrupt/solid-client-authn-browser", () => ({
 	getDefaultSession: () => ({
@@ -89,4 +91,16 @@ describe('MapIdentifier',()=>{
     it('renders without crash', () => {
         render(<MapIdentifier/>);
     });
+});
+
+describe('functions',()=>{
+  const func1 = jest.fn();
+  const func2 = jest.fn();
+
+  it('showsMarkerFromPromise', () => {
+      ShowMarkersFromPromise(readFromDataSetUrl(getSessionWebID().webId), func1, func2);
+      expect(func1).toHaveBeenCalledTimes(0);
+      expect(func2).toHaveBeenCalledTimes(0);
+  });
+
 });
