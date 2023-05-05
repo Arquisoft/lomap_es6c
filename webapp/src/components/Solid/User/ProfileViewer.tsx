@@ -50,7 +50,7 @@ const ProfileViewer = () => {
           </CardActionArea>
         </Card>
       </CombinedDataProvider>
-      <Link to="/start" style={{ color: "#ee7e51", fontWeight: "bold" }}>
+      <Link to="/" id="mapa" style={{ color: "#ee7e51", fontWeight: "bold" }}>
         Mi mapa
       </Link>
       <LogoutButton>
